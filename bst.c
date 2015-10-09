@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 struct Node {
 	double data;
@@ -15,6 +16,7 @@ struct Node *add(struct Node *root, double x) {
 		node -> data = x;
 		node -> left = NULL;
 		node -> right = NULL;
+        return node;
 	} else if (x < root -> data) {
 		root -> left = add(root -> left, x);
 	} else if (x > root -> data) {
@@ -65,6 +67,7 @@ struct Node *delete(struct Node *root, double x) {
 		} else if (root -> left && root -> right == NULL) {
 			return root -> left;
 		} else {
+            // Promote the minimum element of the right subtree
 			struct Node *min_right = tree_min(root -> right);
 			min_right -> right = delete(root -> right, min_right -> data);
 			min_right -> left = root -> left;
@@ -75,5 +78,66 @@ struct Node *delete(struct Node *root, double x) {
 		return root;
 	} else {
 		root -> right = delete(root -> right, x);
+        return root;
 	}
+}
+
+int tree_size(struct Node *root) {
+    if (root) {
+        return 1 + tree_size(root -> left) + tree_size(root -> right);
+    } else {
+        return 0;
+    }
+}
+
+void inorder_traversal(struct Node *root) {
+    if (root) {
+        //printf("%g LEFT TREE\n", root-> data);
+        inorder_traversal(root -> left);
+        printf(" %g ", root -> data);
+        //printf("%g RIGHT TREE\n", root -> data);
+        inorder_traversal(root -> right);
+    }
+}
+
+int main(int argc, char **argv) {
+    struct Node *bst = add(NULL, 10);
+    assert(tree_size(bst) == 1);
+    assert(tree_min(bst) -> data == 10);
+    assert(tree_max(bst) -> data == 10);
+    assert(tree_size(delete(bst, 10)) == 0);
+    inorder_traversal(bst);
+    printf("\n");
+
+    bst = add(bst, 8);
+    assert(tree_size(bst) == 2);
+    assert(tree_min(bst) -> data == 8);
+    assert(tree_max(bst) -> data == 10);
+    inorder_traversal(bst);
+    printf("\n");
+
+    bst = add(bst, 12);
+    assert(tree_size(bst) == 3);
+    assert(tree_min(bst) -> data == 8);
+    assert(tree_max(bst) -> data == 12);
+    inorder_traversal(bst);
+    printf("\n");
+
+    bst = add(bst, 9);
+    assert(tree_size(bst) == 4);
+    assert(tree_min(bst) -> data == 8);
+    assert(tree_max(bst) -> data == 12);
+    inorder_traversal(bst);
+    printf("\n");
+
+    bst = add(bst, 11);
+    inorder_traversal(bst);
+    printf("\n");
+
+    bst = delete(bst, 10);
+    inorder_traversal(bst);
+    printf("\n");
+
+    printf("All tests passed.\n");
+    return 0;
 }
