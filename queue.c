@@ -33,6 +33,14 @@ struct Queue *create_queue() {
     return queue;
 }
 
+int is_empty(struct Queue *list) {
+    if (list -> head == NULL && list -> tail == NULL) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
 void push(double x, struct Queue *list) {
 	
 	struct Node *node = (struct Node *) malloc (sizeof (struct Node));
@@ -52,25 +60,24 @@ void push(double x, struct Queue *list) {
 }
 
 double pop(struct Queue *list) {
-	
-    struct Node *elem_to_pop;
-    if ((elem_to_pop = list -> head)) {
-		list -> head = elem_to_pop -> next;
-		if (!list -> head) {
-			list -> tail = NULL;
-		} else {
-			list -> head -> prev = NULL;
-		}
-		double ret_data = elem_to_pop -> data;
-		free(elem_to_pop);
-		return ret_data;
+
+    assert(!is_empty(list));
+    struct Node *elem_to_pop = list -> head;
+	list -> head = elem_to_pop -> next;
+	if (!list -> head) {
+		list -> tail = NULL;
 	} else {
-        return 0;
+		list -> head -> prev = NULL;
 	}
+	double ret_data = elem_to_pop -> data;
+	free(elem_to_pop);
+	return ret_data;
 }
 
 struct Queue *remove_queue(struct Queue *queue) {
-    while (pop(queue) != 0) ;
+    while (!is_empty(queue)) {
+        pop(queue);
+    }
     free(queue);
     return NULL;
 }
@@ -86,7 +93,6 @@ int main(int argc, char **argv) {
 	push(1, queue);
 	assert(pop(queue) == 3);
 	assert(pop(queue) == 1);
-	assert(pop(queue) == 0);
     
     assert(remove_queue(queue) == NULL);
 
