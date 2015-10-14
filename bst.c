@@ -82,6 +82,7 @@ struct Node *delete(struct Node *root, double x) {
 		root -> right = delete(root -> right, x);
         return root;
 	}
+    return NULL;
 }
 
 int tree_size(struct Node *root) {

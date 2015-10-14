@@ -4,7 +4,11 @@ Queue (Doubly Linked List)
 
 Supports two operations:
     - push(double x, struct Queue *list)
+        adds value x onto the end of the queue
+
     - pop(struct Queue *list)
+        removes head element from the queue and returns its associated
+        data value
 
 *******************************************************************************/
 #include <stdlib.h>
@@ -22,15 +26,17 @@ struct Queue {
 	struct Node *tail;
 };
 
+struct Queue *create_queue() {
+    struct Queue *queue = (struct Queue *) malloc (sizeof (struct Queue));
+    queue -> head = NULL;
+    queue -> tail = NULL;
+    return queue;
+}
+
 void push(double x, struct Queue *list) {
 	
 	struct Node *node = (struct Node *) malloc (sizeof (struct Node));
 	node -> data = x;
-
-	if (!list) {
-		struct Queue *queue = (struct Queue *) malloc (sizeof (struct Queue));
-		push(x, queue);
-	}
 
 	if (list -> tail) {
 		list -> tail -> next = node;
@@ -46,7 +52,9 @@ void push(double x, struct Queue *list) {
 }
 
 double pop(struct Queue *list) {
-	if (struct Node elem_to_pop = list -> head) {
+	
+    struct Node *elem_to_pop;
+    if ((elem_to_pop = list -> head)) {
 		list -> head = elem_to_pop -> next;
 		if (!list -> head) {
 			list -> tail = NULL;
@@ -57,13 +65,19 @@ double pop(struct Queue *list) {
 		free(elem_to_pop);
 		return ret_data;
 	} else {
-		return NULL;
+        return 0;
 	}
+}
+
+struct Queue *remove_queue(struct Queue *queue) {
+    while (pop(queue) != 0) ;
+    free(queue);
+    return NULL;
 }
 
 int main(int argc, char **argv) {
 
-	struct Queue *queue = NULL;
+    struct Queue *queue = create_queue();
 	push(1, queue);
 	push(2, queue);
 	push(3, queue);
@@ -72,7 +86,9 @@ int main(int argc, char **argv) {
 	push(1, queue);
 	assert(pop(queue) == 3);
 	assert(pop(queue) == 1);
-	assert(pop(queue) == NULL);
+	assert(pop(queue) == 0);
+    
+    assert(remove_queue(queue) == NULL);
 
 	printf("All tests passed.\n");
 	return 0;

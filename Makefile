@@ -17,9 +17,12 @@ bst: bst.c
 
 linked-list: linked-list.c
 
+queue: queue.c
+
 .PHONY: clean
 clean:
-	rm -rf bst linked-list *.o
+	rm -rf bst linked-list queue *.o
 
 .PHONY: all
-	bst linked-list
+all:
+	bst linked-list queue
