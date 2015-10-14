@@ -61,22 +61,24 @@ struct Node *tree_min(struct Node *root) {
 struct Node *delete(struct Node *root, double x) {
 	if (x == root -> data) {
 		if (root -> right == NULL && root -> left == NULL) {
-			return NULL;
+            return NULL;
 		} else if (root -> right && root -> left == NULL) {
-			return root -> right;
+            struct Node *right_tree = root -> right;
+            return right_tree;
 		} else if (root -> left && root -> right == NULL) {
-			return root -> left;
+            struct Node *left_tree = root -> left;
+            return left_tree;
 		} else {
             // Promote the minimum element of the right subtree
 			struct Node *min_right = tree_min(root -> right);
 			min_right -> right = delete(root -> right, min_right -> data);
 			min_right -> left = root -> left;
-			return min_right;
+            return min_right;
 		}
 	} else if (x < root -> data) {
 		root -> left = delete(root -> left, x);
 		return root;
-	} else {
+	} else if (x > root -> data) {
 		root -> right = delete(root -> right, x);
         return root;
 	}
@@ -97,6 +99,14 @@ void inorder_traversal(struct Node *root) {
         printf(" %g ", root -> data);
         //printf("%g RIGHT TREE\n", root -> data);
         inorder_traversal(root -> right);
+    }
+}
+
+void tree_clear(struct Node *root) {
+    if (root) {
+        tree_clear(root -> left);
+        tree_clear(root -> right);
+        free(root);
     }
 }
 
@@ -137,6 +147,8 @@ int main(int argc, char **argv) {
     bst = delete(bst, 10);
     inorder_traversal(bst);
     printf("\n");
+
+    tree_clear(bst);
 
     printf("All tests passed.\n");
     return 0;

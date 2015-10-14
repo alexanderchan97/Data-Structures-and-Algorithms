@@ -9,7 +9,6 @@ struct Node {
 
 struct Node *prepend(struct Node *list, double x) {
 	struct Node *node = (struct Node *) malloc (sizeof (struct Node));
-
 	node -> data = x;
 	node -> next = list;
 	return node;
