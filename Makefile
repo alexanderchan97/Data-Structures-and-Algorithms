@@ -13,16 +13,21 @@ LDFLAGS = -g
 # Libraries
 LDLIBS = 
 
+# Executables
+EXECUTABLES = bst linked-list queue stack
+
+.PHONY: all
+all: $(EXECUTABLES)
+
 bst: bst.c
 
 linked-list: linked-list.c
 
 queue: queue.c
 
+stack: stack.c
+
 .PHONY: clean
 clean:
-	rm -rf bst linked-list queue *.o
+	rm -rf $(EXECUTABLES) *.o
 
-.PHONY: all
-all:
-	bst linked-list queue

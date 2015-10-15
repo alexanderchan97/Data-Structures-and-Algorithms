@@ -26,14 +26,16 @@ struct Node *add(struct Node *root, double x) {
 }
 
 struct Node *lookup(struct Node *root, double x) {
-	if (x == root -> data) {
+	if (root == NULL) {
+        return NULL;
+    } else if (x == root -> data) {
 		return root;
 	} else if (x < root -> data) {
 		return lookup(root -> left, x);
 	} else if (x > root -> data) {
 		return lookup(root -> right, x);
 	}
-	return NULL;
+    return NULL;
 }
 
 struct Node *tree_max(struct Node *root) {
@@ -138,6 +140,8 @@ int main(int argc, char **argv) {
     assert(tree_size(bst) == 4);
     assert(tree_min(bst) -> data == 8);
     assert(tree_max(bst) -> data == 12);
+    assert(lookup(bst, 9) -> data == 9);
+    assert(lookup(bst, 15) == NULL);
     inorder_traversal(bst);
     printf("\n");
 
