@@ -14,7 +14,7 @@ LDFLAGS = -g
 LDLIBS = 
 
 # Executables
-EXECUTABLES = bst linked-list queue stack
+EXECUTABLES = bst linked-list queue stack vector
 
 .PHONY: all
 all: $(EXECUTABLES)
@@ -26,6 +26,8 @@ linked-list: linked-list.c
 queue: queue.c
 
 stack: stack.c
+
+vector: vector.c
 
 .PHONY: clean
 clean:
