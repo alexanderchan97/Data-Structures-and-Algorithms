@@ -14,22 +14,16 @@ LDFLAGS = -g
 LDLIBS = 
 
 # Executables
-EXECUTABLES = bst linked-list queue stack vector graph-adj-list
+EXECUTABLES = vector-test
 
 .PHONY: all
 all: $(EXECUTABLES)
 
-bst: bst.c
+vector-test: vector-test.o vector.o
 
-linked-list: linked-list.c
+vector-test.o: vector-test.c
 
-queue: queue.c
-
-stack: stack.c
-
-vector: vector.c
-
-graph-adj-list: graph-adj-list.c
+vector.o: vector.c vector.h
 
 .PHONY: clean
 clean:
