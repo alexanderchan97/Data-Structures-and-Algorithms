@@ -1,11 +1,7 @@
 #ifndef __VECTOR_H__
 #define __VECTOR_H__
 
-struct Vector {
-	int size;
-	int capacity;
-	double *contents;
-};
+struct Vector;
 
 /** 
  * Initializes an empty vector with default capacity.

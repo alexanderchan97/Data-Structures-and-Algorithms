@@ -12,6 +12,12 @@ Vector (Dynamic Array)
 #define VECTOR_INIT_CAP 10
 #define INC_FACTOR 2
 
+struct Vector {
+    int size;
+    int capacity;
+    double *contents;
+};
+
 struct Vector *vector_init() {
     struct Vector *vector = (struct Vector *) malloc (sizeof (struct Vector));
     vector -> size = 0;
