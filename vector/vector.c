@@ -19,18 +19,18 @@ struct Vector {
 };
 
 struct Vector *vector_init() {
-    struct Vector *vector = (struct Vector *) malloc (sizeof (struct Vector));
+    struct Vector *vector = malloc (sizeof (*vector));
     vector -> size = 0;
     vector -> capacity = VECTOR_INIT_CAP;
-    vector -> contents = (double *) malloc (sizeof (double) * (vector -> capacity));
+    vector -> contents = malloc (sizeof (*(vector -> contents)) * (vector -> capacity));
     return vector;
 }
 
 void vector_inc_capacity(struct Vector *v) {
     if (v == NULL) { exit(1); }
     v -> capacity = (v -> capacity) * INC_FACTOR;
-    v -> contents = (double *) realloc (v -> contents,
-        sizeof (double) * (v -> capacity));
+    v -> contents = realloc (v -> contents,
+        sizeof (*(v -> contents)) * (v -> capacity));
 }
 
 int vector_size(struct Vector *v) {
