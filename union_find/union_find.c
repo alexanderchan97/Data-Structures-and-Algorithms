@@ -1,3 +1,16 @@
+/*
+ * union_find.c
+ *
+ * Union Find (Disjoint Sets) Data Structure
+ *
+ * Author: Alexander Chan <alechan@seas.upenn.edu>
+ *
+ * This file implements the union-find, or disjoint sets, data
+ * structure. This structure supports two operations. First, a union,
+ * which takes in two elements as an input and adds them to the same
+ * set. Second, find, which identifies which set an element belongs to.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

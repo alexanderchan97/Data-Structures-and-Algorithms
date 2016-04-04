@@ -1,3 +1,14 @@
+/*
+ * union_find.h
+ *
+ * Union Find (Disjoint Sets) Data Structure
+ *
+ * Author: Alexander Chan <alechan@seas.upenn.edu>
+ *
+ * This file is a header file for union_find.c, the implementation
+ * of a union find/disjoint set data structure.
+ */
+
 #ifndef __UNION_FIND_H__
 #define __UNION_FIND_H__
 

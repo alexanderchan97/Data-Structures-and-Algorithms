@@ -1,16 +1,15 @@
-/******************************************************************************
-
-Stack (Singly Linked List)
-
-Supports two operations:
-    - push(double x, struct Stack *stack)
-        adds value x onto the top of the stack
-
-    - pop(struct Stack *stack)
-        removes head element from the stack and returns its associated
-        data value
-
-*******************************************************************************/
+/*
+ * stack.c
+ * 
+ * Stack Abstract Data Structure
+ *
+ * Author: Alexander Chan <alechan@seas.upenn.edu>
+ *
+ * This file implements a stack data structure. This structure
+ * supports two operations. First, a push, adding a value to the
+ * top of the stack, and second, a pop, removing the top most element
+ * and returning its value.
+ */
 
 #include <stdlib.h>
 #include <stdio.h>
