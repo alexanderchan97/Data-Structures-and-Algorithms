@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 struct UnionFind {
     struct Node *sets;
+    int size;
 };
 
 struct Node {
@@ -20,6 +22,7 @@ struct UnionFind *union_find_init(int i) {
         uf->sets[j].parent = NULL;
         uf->sets[j].rank = 0;
     }
+    uf->size = i;
     return uf;
 }
 
@@ -45,4 +48,41 @@ void union_find_union(struct UnionFind *uf, int s, int t) {
         uf->sets[tRoot].parent = &uf->sets[sRoot];
         uf->sets[sRoot].rank = uf->sets[sRoot].rank + 1;
     }
+}
+
+int getSize(struct UnionFind *uf) {
+    return uf->size;
+}
+
+char *toString(struct UnionFind *uf) {
+    int size = getSize(uf);
+    char tmp[80][size];
+    int exists[size];
+    int i = 0;
+    for (i = 0; i < size; ++i) {
+        tmp[0][i] = 0;
+        exists[i] = 0;
+    }
+    for (i = 0; i < size; ++i) {
+        int currRoot = union_find_find(uf, i);
+        if (exists[currRoot] == 0) {
+            exists[currRoot] = 1;
+            sprintf(tmp[currRoot], "%d", i);
+        } else {
+            char tmpStr[80];
+            sprintf(tmpStr, " %d", i);
+            strcat(tmp[currRoot], tmpStr);
+        }
+    }
+    static char ret[250];
+    for (i = 0; i < size; ++i) {
+        if (tmp[i][0] == 0) {
+            continue;
+        } else {
+            strcat(ret, tmp[i]);
+            strcat(ret, "; ");
+        }
+    }
+    ret[strlen(ret) - 2] = 0;
+    return ret;
 }

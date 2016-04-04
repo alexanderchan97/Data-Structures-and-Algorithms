@@ -18,6 +18,8 @@ int main(int argc, char **argv) {
     assert(union_find_find(uf, 1) == 1);
     assert(union_find_find(uf, 2) == 1);
     assert(union_find_find(uf, 3) == 1);
+   
+    printf("%s\n", toString(uf));
 
     printf("All tests passed.\n");
     return 0;

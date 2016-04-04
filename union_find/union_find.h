@@ -10,4 +10,6 @@ void union_find_union(struct UnionFind *, int, int);
 
 int union_find_find(struct UnionFind *, int);
 
+char *toString(struct UnionFind *);
+
 #endif // __UNION_FIND_H__
