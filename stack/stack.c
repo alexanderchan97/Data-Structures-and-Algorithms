@@ -13,10 +13,11 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <assert.h>
+
+#include "stack.h"
 
 struct Node {
-    double data;
+    int data;
     struct Node *next;
 };
 
@@ -24,39 +25,39 @@ struct Stack {
     struct Node *head;
 };
 
-struct Stack *create_stack() {
-    struct Stack *stack = malloc (sizeof (*stack));
+struct Stack *stack_init() {
+    struct Stack *stack = malloc (sizeof *stack);
     stack->head = NULL;
     return stack;
 }
 
-int is_empty(struct Stack *stack) {
-    if (stack->head == NULL) {
+int stack_isEmpty(struct Stack *s) {
+    if (s->head == NULL) {
         return 1;
     } else {
         return 0;
     }
 }
 
-void push(double x, struct Stack *stack) {
-    struct Node *node = malloc (sizeof (*node));
+void stack_push(struct Stack *stack, int x) {
+    struct Node *node = malloc (sizeof *node);
     node->data = x;
     node->next = stack->head;
     stack->head = node;
 }
 
-double pop(struct Stack *stack) {
-    struct Node *elem_to_pop = stack->head;
-    stack->head = elem_to_pop->next;
-    double ret_data = elem_to_pop->data;
+int stack_pop(struct Stack *s) {
+    struct Node *elem_to_pop = s->head;
+    s->head = elem_to_pop->next;
+    int ret = elem_to_pop->data;
     free(elem_to_pop);
-    return ret_data;
+    return ret;
 }
 
-struct Stack *remove_stack(struct Stack *stack) {
-    while(!is_empty(stack)) {
-        pop(stack);
+struct Stack *stack_free(struct Stack *s) {
+    while (!stack_isEmpty(s)) {
+        stack_pop(s);
     }
-    free(stack);
+    free(s);
     return NULL;
 }

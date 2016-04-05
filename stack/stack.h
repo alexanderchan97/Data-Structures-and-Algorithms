@@ -12,12 +12,12 @@
 struct Node;
 struct Stack;
 
-struct Stack *create_stack();
+struct Stack *stack_init();
 
-int is_empty(struct Stack *);
+int stack_isEmpty(struct Stack *s);
 
-void push(double, struct Stack *);
+void stack_push(struct Stack *stack, int x);
 
-double pop(struct Stack *);
+int stack_pop(struct Stack *s);
 
-struct Stack *remove_stack(struct Stack *);
+struct Stack *stack_free(struct Stack *s);
