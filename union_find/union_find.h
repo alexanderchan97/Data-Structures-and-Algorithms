@@ -23,4 +23,6 @@ int union_find_find(struct UnionFind *, int);
 
 char *toString(struct UnionFind *);
 
+struct UnionFind *union_find_free(struct UnionFind *);
+
 #endif // __UNION_FIND_H__

@@ -99,3 +99,9 @@ char *toString(struct UnionFind *uf) {
     ret[strlen(ret) - 2] = 0;
     return ret;
 }
+
+struct UnionFind *union_find_free(struct UnionFind *uf) {
+    free(uf->sets);
+    free(uf);
+    return NULL;
+}

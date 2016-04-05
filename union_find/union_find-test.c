@@ -21,6 +21,8 @@ int main(int argc, char **argv) {
    
     printf("%s\n", toString(uf));
 
+    assert(union_find_free(uf) == NULL);
+
     printf("All tests passed.\n");
     return 0;
 }
