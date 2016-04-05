@@ -10,13 +10,16 @@
  */
 
 struct Node;
+struct List;
 
-struct Node *ll_prepend(struct Node *list, double x);
+struct List *list_init();
 
-void ll_append(struct Node *list, double x);
+int list_prepend(struct List *list, int x);
 
-void ll_delete(struct Node *list, double x);
+int list_append(struct List *list, int x);
 
-void ll_print(struct Node *list);
+int list_delete(struct List *list, int x);
 
-void ll_apply(struct Node *list, double (*f)(double));
+char *list_toString(struct List *list);
+
+void list_free(struct List *list);
